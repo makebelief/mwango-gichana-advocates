@@ -1,11 +1,38 @@
 
-// Always open the homepage at its actual hero instead of a mobile browser's restored scroll position.
-const isHomePath=location.pathname==='/'||location.pathname.endsWith('/index.html');
+// Force a fresh homepage visit to begin at the hero instead of a mobile browser's restored scroll position.
+const normalizedPath=location.pathname.replace(/\/+$/,'')||'/';
+const isHomePath=normalizedPath==='/'||normalizedPath.endsWith('/index.html');
 if(isHomePath&&'scrollRestoration' in history) history.scrollRestoration='manual';
 if(isHomePath&&!location.hash){
-  const resetHomeScroll=()=>requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:'auto'}));
-  window.addEventListener('pageshow',resetHomeScroll);
-  document.addEventListener('DOMContentLoaded',resetHomeScroll,{once:true});
+  let homeBootActive=true;
+  const resetHomeScroll=()=>{
+    if(!homeBootActive)return;
+    const root=document.documentElement;
+    const body=document.body;
+    root.style.scrollBehavior='auto';
+    window.scrollTo(0,0);
+    root.scrollTop=0;
+    if(body)body.scrollTop=0;
+  };
+  resetHomeScroll();
+  document.addEventListener('DOMContentLoaded',()=>{
+    resetHomeScroll();
+    requestAnimationFrame(()=>requestAnimationFrame(resetHomeScroll));
+  },{once:true});
+  window.addEventListener('load',()=>{
+    resetHomeScroll();
+    setTimeout(resetHomeScroll,60);
+    setTimeout(resetHomeScroll,220);
+    setTimeout(()=>{resetHomeScroll();homeBootActive=false;document.documentElement.style.scrollBehavior='';},600);
+  },{once:true});
+  window.addEventListener('pageshow',event=>{
+    if(event.persisted){
+      homeBootActive=true;
+      resetHomeScroll();
+      requestAnimationFrame(()=>requestAnimationFrame(resetHomeScroll));
+      setTimeout(()=>{resetHomeScroll();homeBootActive=false;},350);
+    }
+  });
 }
 const FIRM_PHONE=''; // Add the verified Kenyan mobile number here, e.g. 2547XXXXXXXX.
 const FIRM_EMAIL='gloria@mwangogichanalegal.com';
@@ -23,7 +50,7 @@ document.querySelectorAll('[data-year]').forEach(el=>el.textContent=new Date().g
 const revealItems=document.querySelectorAll('.reveal');
 if('IntersectionObserver'in window&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){const observer=new IntersectionObserver((entries,current)=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');current.unobserve(entry.target)}}),{threshold:.1,rootMargin:'0px 0px -25px'});revealItems.forEach(item=>observer.observe(item))}else revealItems.forEach(item=>item.classList.add('is-visible'));
 
-const brandReveal=document.querySelector('[data-brand-reveal]');
+const brandReveal=document.querySelector('video[data-brand-reveal]');
 if(brandReveal){
   brandReveal.muted=true;
   brandReveal.playsInline=true;
