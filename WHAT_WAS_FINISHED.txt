@@ -1,0 +1,23 @@
+MWANGO GICHANA & CO. ADVOCATES — DEMO BUILD
+
+Completed:
+- Premium multi-page static website adapted from the same production discipline used for the Victor Andande build.
+- Client-supplied official logo used throughout.
+- Client-supplied Gloria Mwango Gichana portrait used in profile sections.
+- Client-supplied 4K logo animation integrated in a constrained responsive reveal block.
+- Full-bleed landscape hero with controlled overlay and concise copy.
+- Image-led practice-area tiles with no repeated stock photograph on the homepage.
+- Large Google Maps integration (firm-name search; no invented street address).
+- Collapsible right-edge contact sidebar with dark chevron tab and gold WhatsApp / phone panel.
+- Sidebar remains partially visible when collapsed and stays compact on mobile.
+- Mobile responsive breakpoints for desktop, tablet, 390px, 360px and smaller screens.
+- No intentional horizontal overflow; mobile scrollbar hidden aesthetically while scrolling remains enabled.
+- Contact enquiry form prepares an email to gloria@mwangogichanalegal.com.
+- SEO metadata, Open Graph, schema, sitemap, robots, favicon/PWA manifest and security headers.
+- Public fact sheet and source notes included under /docs.
+
+IMPORTANT CONTACT NOTE:
+A verified public firm phone / WhatsApp number was not found in the supplied materials or public research. The rail therefore routes those two actions to the Contact page rather than invent a number. When the verified number is available, set FIRM_PHONE in assets/js/site.js (digits only, e.g. 2547XXXXXXXX). The WhatsApp and tel: links will activate automatically.
+
+IMPORTANT MAP NOTE:
+A verified street office address was not found. The embedded map searches "Mwango Gichana & Co. Advocates, Kenya" and the page explicitly avoids claiming an unverified address.

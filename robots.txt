@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mwango-gichana-advocates.vercel.app/sitemap.xml
