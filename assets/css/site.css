@@ -79,3 +79,71 @@
 @media(max-width:820px){.nav-wrap{height:104px}.brand img{width:138px;height:auto;max-height:96px}}
 @media(max-width:560px){.nav-wrap{height:96px}.brand img{width:126px;height:auto;max-height:88px}}
 @media(max-width:380px){.brand img{width:118px;height:auto;max-height:84px}}
+
+/* v3 corrective polish: compact identity, crisp footer mark, legal hero, mobile-first opening state */
+.site-header{border-top-width:3px}
+.site-header::after{top:-3px;height:3px}
+.nav-wrap{height:86px}
+.brand img{
+  width:132px;
+  height:auto;
+  max-height:76px;
+  object-fit:contain;
+  object-position:left center;
+  mix-blend-mode:normal;
+}
+.footer-logo{
+  width:230px;
+  max-width:100%;
+  height:auto;
+  padding:0;
+  background:transparent;
+  mix-blend-mode:normal;
+  object-fit:contain;
+  image-rendering:auto;
+}
+.hero-full{
+  min-height:clamp(620px,78vh,820px);
+}
+.hero-full-image{
+  object-position:58% center;
+  transform:none;
+}
+.hero-overlay{
+  background:linear-gradient(90deg,rgba(5,15,25,.88) 0%,rgba(5,15,25,.73) 38%,rgba(5,15,25,.38) 67%,rgba(5,15,25,.18) 100%);
+}
+.contact-rail-actions a,
+.contact-rail-actions a:hover,
+.contact-rail-actions a:focus-visible,
+.contact-rail-actions svg{color:#fff}
+
+@media(max-width:1050px){
+  .nav-wrap{height:80px}
+  .brand img{width:122px;max-height:70px}
+}
+@media(max-width:820px){
+  .nav-wrap{height:76px}
+  .brand img{width:112px;max-height:66px}
+  .hero-full{min-height:max(560px,calc(100svh - 76px));align-items:flex-end}
+  .hero-full-image{object-position:62% center}
+  .hero-overlay{background:linear-gradient(180deg,rgba(5,15,25,.28) 0%,rgba(5,15,25,.48) 38%,rgba(5,15,25,.91) 100%)}
+  .hero-content{padding:112px 0 58px}
+}
+@media(max-width:560px){
+  .nav-wrap{height:72px;width:calc(100% - 24px)}
+  .brand img{width:104px;max-height:62px}
+  .menu-toggle{width:40px;height:40px}
+  .hero-full{min-height:max(560px,calc(100svh - 72px))}
+  .hero-full-image{object-position:60% center}
+  .hero-content{width:calc(100% - 32px);padding:100px 0 42px}
+  .hero-content h1{font-size:clamp(2.9rem,14vw,3.65rem);line-height:.94}
+  .hero-lede{font-size:.9rem;line-height:1.58;max-width:94%;margin:18px 0 22px}
+  .hero-actions{gap:14px}
+  .footer-logo{width:210px}
+}
+@media(max-width:380px){
+  .nav-wrap{height:70px}
+  .brand img{width:98px;max-height:58px}
+  .hero-full{min-height:max(540px,calc(100svh - 70px))}
+  .hero-content h1{font-size:2.85rem}
+}

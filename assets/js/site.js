@@ -1,3 +1,12 @@
+
+// Always open the homepage at its actual hero instead of a mobile browser's restored scroll position.
+const isHomePath=location.pathname==='/'||location.pathname.endsWith('/index.html');
+if(isHomePath&&'scrollRestoration' in history) history.scrollRestoration='manual';
+if(isHomePath&&!location.hash){
+  const resetHomeScroll=()=>requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:'auto'}));
+  window.addEventListener('pageshow',resetHomeScroll);
+  document.addEventListener('DOMContentLoaded',resetHomeScroll,{once:true});
+}
 const FIRM_PHONE=''; // Add the verified Kenyan mobile number here, e.g. 2547XXXXXXXX.
 const FIRM_EMAIL='gloria@mwangogichanalegal.com';
 

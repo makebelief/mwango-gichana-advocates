@@ -21,3 +21,13 @@ A verified public firm phone / WhatsApp number was not found in the supplied mat
 
 IMPORTANT MAP NOTE:
 A verified street office address was not found. The embedded map searches "Mwango Gichana & Co. Advocates, Kenya" and the page explicitly avoids claiming an unverified address.
+
+V3 MOBILE / BRAND CORRECTIONS
+- Homepage hero now uses local law-office/legal-consultation photography rather than Gloria's portrait.
+- Homepage explicitly resets to scroll position 0 on page open/restore (unless a URL hash is present) so mobile browsers open on the hero instead of a previously restored lower section.
+- Header now uses the proper dark/gold transparent logo, not the white footer variant.
+- Header height/logo scale reduced on desktop and mobile.
+- Rebuilt high-resolution transparent header and footer logo assets from the supplied official logo.
+- Footer mark uses warm-white + gold on transparent background for clean contrast on navy, with no white rectangle.
+- Floating contact rail action icons remain white.
+- Mobile hero uses viewport-aware sizing and maintains readable overlay copy at 360/390px widths.
