@@ -34,6 +34,36 @@ if(isHomePath&&!location.hash){
     }
   });
 }
+
+// Mobile entry guard: a fresh/direct mobile visit should always land on the homepage.
+// Internal navigation is explicitly allowed so profile/practice pages remain usable on phones.
+const MWANGO_INTERNAL_NAV_KEY='mwango_internal_nav';
+const isMobileEntry=window.matchMedia('(max-width: 820px)').matches;
+let internalEntryAllowed=false;
+try{
+  internalEntryAllowed=sessionStorage.getItem(MWANGO_INTERNAL_NAV_KEY)==='1';
+  sessionStorage.removeItem(MWANGO_INTERNAL_NAV_KEY);
+}catch(e){}
+const isSameOriginReferrer=(()=>{try{return !!document.referrer&&new URL(document.referrer).origin===location.origin}catch(e){return false}})();
+if(isMobileEntry&&!isHomePath&&!internalEntryAllowed&&!isSameOriginReferrer){
+  location.replace('/');
+}
+window.addEventListener('pageshow',event=>{
+  if(event.persisted&&window.matchMedia('(max-width: 820px)').matches&&!isHomePath&&!internalEntryAllowed){
+    location.replace('/');
+  }
+});
+document.addEventListener('click',event=>{
+  const link=event.target.closest('a[href]');
+  if(!link)return;
+  try{
+    const target=new URL(link.getAttribute('href'),location.href);
+    if(target.origin===location.origin){
+      sessionStorage.setItem(MWANGO_INTERNAL_NAV_KEY,'1');
+    }
+  }catch(e){}
+});
+
 const FIRM_PHONE=''; // Add the verified Kenyan mobile number here, e.g. 2547XXXXXXXX.
 const FIRM_EMAIL='gloria@mwangogichanalegal.com';
 

@@ -31,3 +31,11 @@ V3 MOBILE / BRAND CORRECTIONS
 - Footer mark uses warm-white + gold on transparent background for clean contrast on navy, with no white rectangle.
 - Floating contact rail action icons remain white.
 - Mobile hero uses viewport-aware sizing and maintains readable overlay copy at 360/390px widths.
+
+
+V5 mobile-entry fix:
+- Fresh/direct mobile visits to any stale subpage are routed to the homepage first.
+- Internal mobile navigation to Gloria, Practice Areas, Insights and Contact remains available.
+- Added cache-busting query strings to CSS and JS.
+- Homepage hero remains the legal-office image; Gloria's portrait remains only in her profile/about content.
+- Endless animated WebP logo remains 126 frames with loop=0 (infinite).
