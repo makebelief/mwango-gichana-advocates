@@ -15,7 +15,18 @@ const revealItems=document.querySelectorAll('.reveal');
 if('IntersectionObserver'in window&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){const observer=new IntersectionObserver((entries,current)=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');current.unobserve(entry.target)}}),{threshold:.1,rootMargin:'0px 0px -25px'});revealItems.forEach(item=>observer.observe(item))}else revealItems.forEach(item=>item.classList.add('is-visible'));
 
 const brandReveal=document.querySelector('[data-brand-reveal]');
-if(brandReveal){if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)brandReveal.pause();else brandReveal.play().catch(()=>{});}
+if(brandReveal){
+  brandReveal.muted=true;
+  brandReveal.playsInline=true;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    brandReveal.pause();
+  }else{
+    const tryPlay=()=>brandReveal.play().catch(()=>{});
+    if(brandReveal.readyState>=2) tryPlay();
+    else brandReveal.addEventListener('canplay',tryPlay,{once:true});
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)tryPlay()});
+  }
+}
 
 const form=document.querySelector('[data-enquiry-form]');
 form?.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;const data=new FormData(form);const subject=`Website enquiry — ${data.get('service')||'General legal enquiry'}`;const body=[`Name: ${data.get('name')||''}`,`Email: ${data.get('email')||''}`,`Telephone: ${data.get('telephone')||'Not provided'}`,`Area: ${data.get('service')||'General enquiry'}`,'','Brief outline:',`${data.get('enquiry')||''}`].join('\n');const status=form.querySelector('[data-form-status]');if(status)status.textContent='Opening your email app with the enquiry prepared.';window.location.href=`mailto:${FIRM_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`});
